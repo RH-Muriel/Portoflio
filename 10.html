@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Rédaction Web & SEO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #50e3c2;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding-top: 20px;
+        }
+        
+        .Title-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .Title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90e2 0%, #50e3c2 100%);
+            border-radius: 2px;
+        }
+        
+        .highlight {
+            color: #4a90e2;
+            font-weight: 700;
+        }
+        
+        .blog-section {
+            background: rgba(248, 250, 252, 0.95);
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+        }
+        
+        .blog-section::before {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #4a90e210 0%, #50e3c210 100%);
+            border-radius: 70% 30% 30% 70%;
+            filter: blur(80px);
+            z-index: 0;
+        }
+        
+        .blog-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .zoom-effect {
+            transition: transform 0.3s ease;
+            transform-origin: center;
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .blog-card:hover .zoom-effect {
+            transform: scale(1.05);
+        }
+        
+        .featured-post {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .hover-underline {
+            position: relative;
+            color: var(--primary);
+            text-decoration: none !important;
+        }
+        
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4a90e2 0%, #50e3c2 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .hover-underline:hover::after {
+            width: 100%;
+        }
+        
+        .pagination .page-link {
+            border: none;
+            color: var(--primary);
+            margin: 0 5px;
+            border-radius: 8px !important;
+            transition: all 0.3s ease;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .pagination .page-link.active {
+            background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
+            color: white;
+            border: none;
+            transform: scale(1.1);
+        }
+        
+        .pagination .page-link:hover:not(.active) {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
+        }
+        
+        .featured-img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.01);
+        }
+        
+        /* Styles du carousel */
+        .carousel-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .carousel-inner {
+            border-radius: 16px;
+        }
+        
+        .carousel-item {
+            transition: transform 0.8s ease-in-out;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            z-index: 15;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            margin: 0 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicators button.active {
+            background-color: white;
+            transform: scale(1.4);
+        }
+        
+        .carousel-control-prev, .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            background: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+        }
+        
+        .carousel-control-prev {
+            left: 20px;
+        }
+        
+        .carousel-control-next {
+            right: 20px;
+        }
+        
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+        
+        /* Animation des articles */
+        .article-animation {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation du badge */
+        .featured-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.5); }
+            70% { box-shadow: 0 0 0 12px rgba(74, 144, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carousel-caption {
+                bottom: 10px;
+            }
+            
+            .carousel-control-prev, .carousel-control-next {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .blog-section {
+                padding: 2rem 0;
+            }
+            
+            .pagination .page-link {
+                min-width: 35px;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section Blog -->
+    <section class="blog-section py-5" id="blog">
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="Title-underline display-5 fw-bold mb-4">Derniers <span class="highlight">Articles</span></h2>
+                    <p class="lead">Découvrez mes conseils en rédaction web et actualités du SEO</p>
+                </div>
+            </div>
+
+            <!-- Carousel des articles en vedette -->
+            <div class="carousel-container mb-5">
+                <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <!-- Article 1 -->
+                        <div class="carousel-item active">
+                            <div class="featured-post">
+                                <div class="card border-0 shadow-lg overflow-hidden hover-scale">
+                                    <div class="row g-0">
+                                        <div class="col-md-6">
+                                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" class="featured-img" alt="Rédaction web SEO">
+                                        </div>
+                                        <div class="col-md-6 bg-light">
+                                            <div class="p-4 p-xl-5">
+                                                <div class="post-meta d-flex gap-3 mb-3">
+                                                    <span class="badge bg-gradient text-white featured-badge">Nouveau</span>
+                                                    <span class="text-muted">15 Mai 2024</span>
+                                                </div>
+                                                <h3 class="h2 mb-3">Les 10 commandements de la rédaction SEO en 2024</h3>
+                                                <p class="mb-4">Découvrez les meilleures pratiques pour rédiger des contenus optimisés qui dominent les SERPs et attirent plus de trafic qualifié vers votre site.</p>
+                                                <a href="#" class="btn btn-link p-0 text-decoration-none hover-underline">
+                                                    Lire l'article <i class="fas fa-arrow-right ms-2"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Article 2 -->
+                        <div class="carousel-item">
+                            <div class="featured-post">
+                                <div class="card border-0 shadow-lg overflow-hidden hover-scale">
+                                    <div class="row g-0">
+                                        <div class="col-md-6">
+                                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" class="featured-img" alt="Rédaction technique">
+                                        </div>
+                                        <div class="col-md-6 bg-light">
+                                            <div class="p-4 p-xl-5">
+                                                <div class="post-meta d-flex gap-3 mb-3">
+                                                    <span class="badge bg-gradient text-white">Populaire</span>
+                                                    <span class="text-muted">10 Mai 2024</span>
+                                                </div>
+                                                <h3 class="h2 mb-3">Rédaction technique : guide pour débutants</h3>
+                                                <p class="mb-4">Apprenez à transformer des sujets complexes en contenu accessible et engageant pour votre audience.</p>
+                                                <a href="#" class="btn btn-link p-0 text-decoration-none hover-underline">
+                                                    Lire l'article <i class="fas fa-arrow-right ms-2"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Article 3 -->
+                        <div class="carousel-item">
+                            <div class="featured-post">
+                                <div class="card border-0 shadow-lg overflow-hidden hover-scale">
+                                    <div class="row g-0">
+                                        <div class="col-md-6">
+                                            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80" class="featured-img" alt="SEO local">
+                                        </div>
+                                        <div class="col-md-6 bg-light">
+                                            <div class="p-4 p-xl-5">
+                                                <div class="post-meta d-flex gap-3 mb-3">
+                                                    <span class="badge bg-gradient text-white">Essentiel</span>
+                                                    <span class="text-muted">5 Mai 2024</span>
+                                                </div>
+                                                <h3 class="h2 mb-3">Maîtriser le SEO local en 2024</h3>
+                                                <p class="mb-4">Stratégies avancées pour dominer les résultats de recherche dans votre zone géographique.</p>
+                                                <a href="#" class="btn btn-link p-0 text-decoration-none hover-underline">
+                                                    Lire l'article <i class="fas fa-arrow-right ms-2"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Précédent</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Suivant</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Liste des articles -->
+            <div class="row g-4" id="articlesContainer">
+                <!-- Les articles seront chargés dynamiquement ici -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <nav aria-label="Navigation des articles">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link prev-page" href="#" aria-label="Précédent">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link active" href="#" data-page="1">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link next-page" href="#" aria-label="Suivant">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Données des articles pour chaque page
+        const articlesData = {
+            1: [
+                {
+                    id: 1,
+                    title: "Optimiser ses anciens contenus : la méthode complète",
+                    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Optimisation SEO",
+                    time: "5 min",
+                    date: "12 Mai 2024",
+                    description: "Guide étape par étape pour redonner vie à vos anciens articles et améliorer leur performance SEO."
+                },
+                {
+                    id: 2,
+                    title: "Rédaction e-commerce : boostez vos conversions",
+                    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Rédaction e-commerce",
+                    time: "8 min",
+                    date: "8 Mai 2024",
+                    description: "Les techniques éprouvées pour des fiches produits qui vendent et convertissent les visiteurs en clients."
+                },
+                {
+                    id: 3,
+                    title: "SEO multilingue : stratégies gagnantes",
+                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "SEO multilingue",
+                    time: "6 min",
+                    date: "2 Mai 2024",
+                    description: "Comment adapter son contenu pour un public international et améliorer votre visibilité à l'échelle mondiale."
+                }
+            ],
+            2: [
+                {
+                    id: 4,
+                    title: "Les secrets du copywriting persuasif",
+                    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Copywriting",
+                    time: "7 min",
+                    date: "28 Avril 2024",
+                    description: "Techniques avancées pour écrire des textes qui convertissent et persuadent."
+                },
+                {
+                    id: 5,
+                    title: "SEO technique : les fondamentaux",
+                    image: "https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "SEO technique",
+                    time: "9 min",
+                    date: "22 Avril 2024",
+                    description: "Comprendre et mettre en œuvre les bases du SEO technique pour un site performant."
+                },
+                {
+                    id: 6,
+                    title: "Référencement naturel : tendances 2024",
+                    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Tendances SEO",
+                    time: "6 min",
+                    date: "15 Avril 2024",
+                    description: "Les nouvelles tendances du SEO à adopter dès maintenant pour rester compétitif."
+                }
+            ],
+            3: [
+                {
+                    id: 7,
+                    title: "Rédaction web : les erreurs à éviter",
+                    image: "https://images.unsplash.com/photo-1551836022-8b2858c9c69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Erreurs rédaction",
+                    time: "4 min",
+                    date: "10 Avril 2024",
+                    description: "Les pièges courants de la rédaction web et comment les éviter pour un contenu optimal."
+                },
+                {
+                    id: 8,
+                    title: "Blogging efficace : guide complet",
+                    image: "https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Blogging",
+                    time: "10 min",
+                    date: "5 Avril 2024",
+                    description: "Comment créer et maintenir un blog qui génère du trafic et des leads."
+                },
+                {
+                    id: 9,
+                    title: "Les mots-clés longue traîne : votre atout SEO",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
+                    alt: "Mots-clés",
+                    time: "5 min",
+                    date: "1 Avril 2024",
+                    description: "Découvrez comment utiliser les mots-clés longue traîne pour un référencement efficace."
+                }
+            ]
+        };
+        
+        // Fonction pour afficher les articles d'une page spécifique
+        function renderArticles(page) {
+            const container = document.getElementById('articlesContainer');
+            container.innerHTML = '';
+            
+            articlesData[page].forEach((article, index) => {
+                const articleHTML = `
+                    <div class="col-md-6 col-lg-4">
+                        <article class="blog-card">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-img-top overflow-hidden">
+                                    <img src="${article.image}" class="zoom-effect" alt="${article.alt}">
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="post-meta d-flex align-items-center gap-3 mb-3">
+                                        <span class="text-primary"><i class="far fa-clock me-1"></i>${article.time}</span>
+                                        <span class="text-muted">${article.date}</span>
+                                    </div>
+                                    <h4 class="h5 mb-3">${article.title}</h4>
+                                    <p class="text-secondary mb-4">${article.description}</p>
+                                    <a href="#" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                `;
+                
+                container.innerHTML += articleHTML;
+            });
+            
+            // Réappliquer les animations au survol
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+        
+        // Fonction pour mettre à jour la pagination
+        function updatePagination(activePage) {
+            const pageLinks = document.querySelectorAll('.page-link[data-page]');
+            pageLinks.forEach(link => {
+                link.classList.remove('active');
+                if (parseInt(link.dataset.page) === activePage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Afficher la première page d'articles
+            renderArticles(1);
+            
+            // Gestion de la pagination
+            const pageLinks = document.querySelectorAll('.page-link[data-page]');
+            pageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = parseInt(this.dataset.page);
+                    renderArticles(page);
+                    updatePagination(page);
+                });
+            });
+            
+            // Boutons précédent/suivant
+            document.querySelector('.prev-page').addEventListener('click', function(e) {
+                e.preventDefault();
+                const activePage = document.querySelector('.page-link.active[data-page]');
+                let page = parseInt(activePage.dataset.page);
+                page = page > 1 ? page - 1 : 1;
+                
+                if (page !== parseInt(activePage.dataset.page)) {
+                    renderArticles(page);
+                    updatePagination(page);
+                }
+            });
+            
+            document.querySelector('.next-page').addEventListener('click', function(e) {
+                e.preventDefault();
+                const activePage = document.querySelector('.page-link.active[data-page]');
+                let page = parseInt(activePage.dataset.page);
+                const maxPage = Object.keys(articlesData).length;
+                page = page < maxPage ? page + 1 : maxPage;
+                
+                if (page !== parseInt(activePage.dataset.page)) {
+                    renderArticles(page);
+                    updatePagination(page);
+                }
+            });
+            
+            // Animation du carousel
+            const carousel = document.querySelector('#featuredCarousel');
+            
+            // Animation au changement de slide
+            carousel.addEventListener('slide.bs.carousel', function(e) {
+                const nextItem = e.relatedTarget;
+                nextItem.classList.add('animate__animated', 'animate__fadeIn');
+                
+                setTimeout(() => {
+                    nextItem.classList.remove('animate__animated', 'animate__fadeIn');
+                }, 1000);
+            });
+            
+            // Animation du badge "Nouveau"
+            const badge = document.querySelector('.featured-badge');
+            setInterval(() => {
+                badge.classList.toggle('animate__pulse');
+            }, 3000);
+            
+            // Animation au survol des articles
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

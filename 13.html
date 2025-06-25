@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muriel - Expert en Rédaction Web | SEMJI, text.grou, 1.fr</title>
+    <meta name="description" content="Expert en rédaction web avec 11+ ans d'expérience. Spécialiste en stratégie de contenu SEO avec SEMJI et text.grou pour 1.fr.">
+    <meta name="keywords" content="rédaction web, SEO, SEMJI, text.grou, 1.fr, optimisation de contenu, traduction">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #50e3c2;
+            --secondary-alt: #8892b0;
+            --text-light: #ffffff;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --text-gradient: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #334155;
+            background-color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section À Propos - Conserve les styles existants */
+        .about-section {
+            background: rgba(248, 250, 252, 0.95);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+        }
+
+        .about-section::before {
+            content: "";
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #4a90e255 0%, #50e3c255 100%);
+            border-radius: 30% 70% 70% 30%;
+            filter: blur(100px);
+            z-index: 0;
+            animation: gradient-morph 15s infinite alternate;
+        }
+
+        @keyframes gradient-morph {
+            0% { border-radius: 30% 70% 70% 30%; transform: rotate(0deg); }
+            100% { border-radius: 70% 30% 30% 70%; transform: rotate(180deg); }
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .col-lg-8, .col-md-6 {
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-5 {
+            margin-bottom: 3rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .Title-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .Title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .highlight {
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .display-5 {
+            font-size: 2.8rem;
+        }
+
+        .fw-bold {
+            font-weight: 700 !important;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Image - Conserve les styles existants */
+        .about-image {
+            position: relative;
+            z-index: 1;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: rotate(0deg);
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .rounded-3 {
+            border-radius: 16px !important;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        }
+
+        .position-absolute {
+            position: absolute !important;
+        }
+
+        .top-0 {
+            top: 0 !important;
+        }
+
+        .start-0 {
+            left: 0 !important;
+        }
+
+        .bg-pr {
+            background-color: var(--primary) !important;
+        }
+
+        .opacity-10 {
+            opacity: 0.1 !important;
+        }
+
+        /* Compétences - Modifications des barres de progression */
+        .skills {
+            margin-bottom: 3rem !important;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .justify-content-between {
+            justify-content: space-between !important;
+        }
+
+        .progress {
+            height: 12px !important; /* Hauteur légèrement augmentée */
+            background-color: rgba(74, 144, 226, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+            will-change: width;
+            background: var(--gradient) !important;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progress-shine 2s infinite;
+        }
+
+        @keyframes progress-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Points forts - Conserve le style fact-box */
+        .key-facts {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .col-6, .col-md-4 {
+            padding: 0 10px;
+            flex: 0 0 auto;
+            width: 50%;
+        }
+
+        @media (min-width: 768px) {
+            .col-md-4 {
+                width: 33.33333333%;
+            }
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .fact-box {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid rgba(74, 144, 226, 0.15);
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .fact-box:hover {
+            transform: translateY(-5px);
+            background: rgba(74, 144, 226, 0.2);
+        }
+
+        .fact-box h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .fact-box small {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        /* SEO Badges */
+        .seo-badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .seo-badge {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .seo-badge:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .display-5 {
+                font-size: 2.2rem;
+            }
+            
+            .lead {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-image {
+                margin-bottom: 2rem;
+            }
+            
+            .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="about-section py-5" id="about" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Muriel">
+        <meta itemprop="url" content="https://www.1.fr">
+        <meta itemprop="knowsAbout" content="Rédaction SEO, Optimisation de contenu, Traduction multilingue">
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="Title-underline display-5 fw-bold mb-4" itemprop="jobTitle">Mon Parcours <span
+                            class="highlight">Professionnel</span></h2>
+                    <p class="lead" itemprop="description">Avec plus d'une décennie d'expérience en rédaction web, je maîtrise l'art de
+                        transformer des idées en contenus engageants et optimisés pour le SEO.</p>
+                </div>
+            </div>
+
+            <div class="row g-5 align-items-center">
+                <!-- Image -->
+                <div class="col-md-6">
+                    <div class="about-image position-relative">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=700&q=80" 
+                             alt="Muriel au travail" 
+                             class="img-fluid rounded-3 shadow-lg"
+                             itemprop="image">
+                        <div class="position-absolute top-0 start-0 bg-pr opacity-10"
+                            style="width: 100%; height: 100%; border-radius: 16px; filter: blur(50px);"></div>
+                    </div>
+                </div>
+
+                <!-- Contenu -->
+                <div class="col-md-6">
+                    <div class="about-content">
+                        <h3 class="mb-4" itemprop="description">Expertise en <span class="highlight">Stratégie de Contenu</span></h3>
+                        <p class="mb-4" itemprop="description">Spécialisée dans la création de contenus multilingues (français, anglais,
+                            malgache), je combine stratégie SEO et storytelling captivant pour des résultats mesurables.
+                            J'utilise <strong>SEMJI</strong> pour l'analyse sémantique, <strong>text.grou</strong> pour l'optimisation thématique,
+                            et travaille avec <strong>1.fr</strong> pour des solutions de référencement innovantes.
+                        </p>
+
+                        <!-- Compétences -->
+                        <div class="skills mb-5">
+                            <div class="skill-item mb-4" itemprop="knowsAbout" content="Rédaction SEO">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Rédaction SEO avec SEMJI</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="progress" style="height: 12px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 95%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-item mb-4" itemprop="knowsAbout" content="Optimisation de contenu">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Optimisation avec text.grou</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="progress" style="height: 12px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-item mb-4" itemprop="knowsAbout" content="Traduction">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Stratégie de référencement 1.fr</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress" style="height: 12px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Points forts - Conserve le style fact-box -->
+                        <div class="key-facts row g-4">
+                            <div class="col-6 col-md-4 text-center">
+                                <div class="fact-box p-3 rounded-3">
+                                    <h3 class="text-primary mb-0">10K+</h3>
+                                    <small>Articles rédigés</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4 text-center">
+                                <div class="fact-box p-3 rounded-3">
+                                    <h3 class="text-primary mb-0">97%</h3>
+                                    <small>Clients satisfaits</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4 text-center">
+                                <div class="fact-box p-3 rounded-3">
+                                    <h3 class="text-primary mb-0">11+</h3>
+                                    <small>Années d'expérience</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges SEO -->
+                        <div class="seo-badges mt-4">
+                            <span class="seo-badge">SEMJI</span>
+                            <span class="seo-badge">text.grou</span>
+                            <span class="seo-badge">1.fr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animation des barres de progression
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            
+            // Réinitialiser la largeur pour l'animation
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                
+                // Animer après un court délai
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

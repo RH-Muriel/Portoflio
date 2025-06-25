@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barre de navigation avec indicateur actif</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #50e3c2;
+            --text-light: #ffff;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: -70px;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn-hero {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styles pour la navbar */
+        .custum-navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            top: 0;
+            padding: 15px 0;
+        }
+
+        .custum-navbar.scrolled {
+            background: var(--gradient) !important;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 8px 0;
+        }
+
+        .custum-navbar .nav-link {
+            color: #fff !important;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        /* MODIFICATION PRINCIPALE: Bordure pour l'élément actif */
+        .custum-navbar .nav-link.active:not(.dropdown-toggle)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Effet au survol */
+        .custum-navbar .nav-link:not(.active):not(.dropdown-toggle)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .custum-navbar .nav-link:hover:not(.active):not(.dropdown-toggle)::after {
+            transform: scaleX(1);
+        }
+
+        .custum-navbar .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            font-size: 1.3rem;
+            color: var(--light);
+        }
+
+        .logo-text {
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .custom-toggler.navbar-toggler {
+            border: none;
+            padding: 0.25rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .custom-toggler .toggler-icon {
+            display: block;
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--light);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .custom-toggler .toggler-icon::before,
+        .custom-toggler .toggler-icon::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .custom-toggler .toggler-icon::before {
+            transform: translateY(-8px);
+        }
+
+        .custom-toggler .toggler-icon::after {
+            transform: translateY(8px);
+        }
+
+        .custom-toggler[aria-expanded="true"] .toggler-icon {
+            background: transparent;
+        }
+
+        .custom-toggler[aria-expanded="true"] .toggler-icon::before {
+            transform: rotate(45deg) translate(5px, -5px);
+        }
+
+        .custom-toggler[aria-expanded="true"] .toggler-icon::after {
+            transform: rotate(-45deg) translate(5px, 5px);
+        }
+
+        /* Flèche du dropdown - IMPORTANT: Conservation de la flèche */
+        .custum-navbar .dropdown-toggle::after {
+            border: none !important;
+            content: "\f107" !important; /* Flèche Font Awesome */
+            font-family: "Font Awesome 5 Free" !important;
+            font-weight: 900 !important;
+            vertical-align: middle !important;
+            margin-left: 8px !important;
+            color: white !important;
+            transition: transform 0.3s ease;
+        }
+
+        .custum-navbar .dropdown .dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(-180deg);
+        }
+
+        .mega-menu-modern {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0.75rem;
+            min-width: 800px;
+            display: none;
+            margin-top: 0.7rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .mega-column a.autres-link::after {
+            content: "\f105";
+            color: var(--primary);
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            vertical-align: middle;
+            font-size: 0.9em;
+            margin-left: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .mega-column a.autres-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        .nav-item.dropdown:hover .mega-menu-modern {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .mega-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .mega-column h6 {
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #4a90e2;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #4a90e2;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+
+        .mega-column a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 0.7rem;
+            transition: all 0.3s;
+            padding: 4px 0;
+            position: relative;
+        }
+
+        .mega-column a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .mega-column a:hover {
+            color: #4a90e2;
+        }
+        
+        .mega-column a:hover::before {
+            width: 100%;
+        }
+        
+        @media (max-width: 991px) {
+            .mega-menu-modern {
+                position: static !important;
+                transform: none !important;
+                min-width: 100% !important;
+                border-radius: 10px;
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                backdrop-filter: none;
+                background: white;
+            }
+
+            .mega-content {
+                grid-template-rows: 1fr;
+            }
+            
+            .custum-navbar .nav-link.active:not(.dropdown-toggle)::after {
+                width: 60%;
+                left: 20%;
+            }
+            
+            .custum-navbar .nav-link {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .custum-navbar .dropdown-toggle::after {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .btn-contact {
+            border: 2px solid #fff;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px 24px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            background: transparent;
+        }
+
+        .btn-contact:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+        }
+        
+        /* Sections de contenu */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a90e2;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-title {
+            color: #4a90e2;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .explanation-box {
+            background: white;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .explanation-box h3 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .highlight {
+            color: #50e3c2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="custum-navbar navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-pen-nib me-2"></i><span class="logo-text">Muriel</span>
+            </a>
+
+            <!-- Groupe mobile -->
+            <div class="d-flex align-items-center order-lg-2">
+                <!-- Bouton Contact mobile -->
+                <button class="btn btn-contact d-lg-none mobile-contact">
+                    <span class="text-uppercase">Contactez-moi</span>
+                </button>
+
+                <!-- Toggler personnalisé -->
+                <button class="custom-toggler navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="toggler-icon"></span>
+                </button>
+            </div>
+
+            <!-- Menu principal -->
+            <div class="collapse navbar-collapse order-lg-1" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">à propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Articles
+                        </a>
+                        <div class="dropdown-menu mega-menu-modern">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <h6>Voyages</h6>
+                                    <a href="#">Pologne</a>
+                                    <a href="#">France</a>
+                                    <a href="#">Canada</a>
+                                </div>
+                                <div class="mega-column">
+                                    <h6>Produits</h6>
+                                    <a href="#">Électronique</a>
+                                    <a href="#">Mode</a>
+                                    <a href="#">Cuisine</a>
+                                </div>
+                                <div class="mega-column">
+                                    <h6>Décoration</h6>
+                                    <a href="#">Intérieur/Extérieur</a>
+                                    <a href="#">Architecture</a>
+                                    <a href="#" class="autres-link"><span class="text-primary">Autres</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                </ul>
+                <!-- Bouton Contact desktop -->
+                <a href="#contact" class="btn btn-contact d-none d-lg-inline-block">
+                    <span>Contactez-moi</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Barre de navigation professionnelle</h1>
+            <p>Solution complète avec indicateur actif et menu déroulant avancé</p>
+            <button class="btn btn-hero">Découvrir</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="explanation-box">
+            <h3>Solution pour la bordure active et conservation de la flèche</h3>
+            <p>J'ai ajouté une bordure inférieure pour l'élément actif tout en conservant la flèche du menu déroulant "Articles" grâce à ces modifications CSS :</p>
+            
+            <div class="code-block">
+                <span class="highlight">/* Cible uniquement les liens non-dropdown */</span><br>
+                .custum-navbar .nav-link.active<span class="highlight">:not(.dropdown-toggle)</span>::after {<br>
+                &nbsp;&nbsp;content: '';<br>
+                &nbsp;&nbsp;position: absolute;<br>
+                &nbsp;&nbsp;bottom: 0;<br>
+                &nbsp;&nbsp;left: 0;<br>
+                &nbsp;&nbsp;width: 100%;<br>
+                &nbsp;&nbsp;height: 3px;<br>
+                &nbsp;&nbsp;background-color: white;<br>
+                }<br><br>
+                
+                <span class="highlight">/* Conserve la flèche du dropdown */</span><br>
+                .custum-navbar .dropdown-toggle::after {<br>
+                &nbsp;&nbsp;<span class="highlight">border: none !important;</span><br>
+                &nbsp;&nbsp;<span class="highlight">content: "\f107" !important;</span><br>
+                &nbsp;&nbsp;<span class="highlight">font-family: "Font Awesome 5 Free" !important;</span><br>
+                &nbsp;&nbsp;<span class="highlight">font-weight: 900 !important;</span><br>
+                }<br>
+            </div>
+            
+            <p>Cette solution garantit que :</p>
+            <ul>
+                <li>La bordure active n'est appliquée qu'aux liens normaux (pas au dropdown)</li>
+                <li>La flèche du menu déroulant est préservée grâce aux règles !important</li>
+                <li>Le design reste cohérent sur tous les appareils</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <div class="section-title">
+                <h2>Nos Services</h2>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="feature-title">Développement Web</h3>
+                    <p>Création de sites web modernes et performants avec les dernières technologies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="feature-title">Design UI/UX</h3>
+                    <p>Conception d'interfaces utilisateur intuitives et esthétiques pour une expérience optimale.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Applications Mobiles</h3>
+                    <p>Développement d'applications natives et hybrides pour iOS et Android.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fas fa-pen-nib me-2"></i>Muriel Design
+            </div>
+            <div class="footer-links">
+                <a href="#">Accueil</a>
+                <a href="#about">À propos</a>
+                <a href="#services">Services</a>
+                <a href="#">Articles</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Muriel Design. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gestion du changement d'apparence au défilement
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.custum-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
