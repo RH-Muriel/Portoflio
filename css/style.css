@@ -1236,7 +1236,7 @@ body {
   bottom: 70px;
   right: 20px;
   z-index: 99;
-  background-color: var(--text-danger);
+  background-color: var(--primary);
   color: var(--text-light);
   border: none;
   outline: none;

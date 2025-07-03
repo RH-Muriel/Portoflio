@@ -50,6 +50,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+// pdf
+function downloadPDFs() {
+  const files = [
+    'download/Curriculum_vitae_Muriel_SEO.pdf',
+    'download/Portfolio_Muriel_Free.pdf'
+  ];
+
+  files.forEach((file) => {
+    const a = document.createElement('a');
+    a.href = file;
+    a.download = file.split('/').pop(); // nom du fichier à télécharger
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+}
   // progress bar
   // Animation des barres de compétences
 function animateProgressBars() {
