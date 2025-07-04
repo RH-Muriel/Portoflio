@@ -13,7 +13,8 @@
     <!-- Favicons -->
     <link href="img/logo/logo-icon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -26,6 +27,7 @@
 </head>
 
 <body>
+
     <!-- header -->
     <div class="header-section">
         <video autoplay muted loop playsinline class="bg-video">
@@ -36,7 +38,7 @@
         <nav class="custum-navbar navbar navbar-expand-lg navbar-light fixed-top">
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.html">
                     <i class="fas fa-pen-nib me-2"></i><span class="logo-text">Muriel</span>
                 </a>
 
@@ -59,13 +61,13 @@
                 <div class="collapse navbar-collapse order-lg-1" id="navbarNavDropdown">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link " href="#">Accueil</a>
+                            <a class="nav-link " href="/" data-target="#home">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">à propos</a>
+                            <a class="nav-link" href="/" data-target="#about">à propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#services">Services</a>
+                            <a class="nav-link" href="/" data-target="#services">Services</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -73,7 +75,7 @@
                                 Articles
                             </a>
                             <div class="dropdown-menu mega-menu-modern">
-                                <div class="mega-content">
+                                <div class="mega-content ">
                                     <div class="mega-column">
                                         <h6>Voyages</h6>
                                         <a href="pologne.html">Pologne</a>
@@ -82,8 +84,8 @@
                                     </div>
                                     <div class="mega-column">
                                         <h6>Produits</h6>
+                                        <a href="techno.html">Technologie</a>
                                         <a href="#">Électronique</a>
-                                        <a href="#">Technologie</a>
                                         <a href="#">Mode</a>
                                     </div>
                                     <div class="mega-column">
@@ -98,12 +100,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#blog">Blog</a>
+                            <a class="nav-link" href="/" data-target="#blog">Blog</a>
                         </li>
                     </ul>
                     <!-- Bouton Contact desktop -->
-                    <a href="#contact" class="btn btn-contact d-none d-lg-inline-block">
-                        <span>Contactez-moi</span>
+                    <a href="/" class="btn btn-contact d-none d-lg-inline-block" data-target="#contact">
+                        Contactez-moi
                     </a>
                 </div>
             </div>
@@ -125,15 +127,16 @@
                                 comme les articles de blog, les fichesproduits, les guides d'achat, les
                                 comparatifs, etc.
                             </p>
-                            <a href="download/curriculum vitae Muriel Free.pdf" download="Curriculum_vitae_Muriel_Free.pdf"
-                                class="button" style="display: inline-block; text-decoration: none;">
+                            <a href="download/curriculum vitae Muriel Free.pdf"
+                                download="Curriculum_vitae_Muriel_Free.pdf" class="button"
+                                style="display: inline-block; text-decoration: none;">
                                 <span class="button_lg">
                                     <span class="button_sl"></span>
                                     <span class="button_text"> Télécharger mon CV</span>
                                 </span>
                             </a>
 
-                              
+
                         </div>
                     </div>
                     <div class="col-lg-6 order-lg-2">
@@ -655,8 +658,8 @@
                                     class="btn btn-icon btn-lg rounded-circle" title="Page Facebook">
                                     <i class="fab fa-facebook"></i>
                                 </a>
-                                <a href="https://api.whatsapp.com/send?phone=261346966556&text=Haingotiana%20Muriel" target="_blank"
-                                    class="btn btn-icon btn-lg rounded-circle" title="Contact WhatsApp">
+                                <a href="https://api.whatsapp.com/send?phone=261346966556&text=Haingotiana%20Muriel"
+                                    target="_blank" class="btn btn-icon btn-lg rounded-circle" title="Contact WhatsApp">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </div>
@@ -749,9 +752,11 @@
                         </li>
                         <li><a href="#" class="text-white text-decoration-none mb-2 d-block hover-primary">À propos</a>
                         </li>
-                        <li><a href="#services" class="text-white text-decoration-none mb-2 d-block hover-primary">Services</a>
+                        <li><a href="#services"
+                                class="text-white text-decoration-none mb-2 d-block hover-primary">Services</a>
                         </li>
-                        <li><a href="#blog" class="text-white text-decoration-none mb-2 d-block hover-primary">Blog</a></li>
+                        <li><a href="#blog" class="text-white text-decoration-none mb-2 d-block hover-primary">Blog</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -782,10 +787,12 @@
                             class="btn btn-icon-soscial btn-lg rounded-circle">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="https://www.instagram.com/murielhaingotiana/" target="_blank" class="btn btn-icon-soscial btn-lg rounded-circle">
+                        <a href="https://www.instagram.com/murielhaingotiana/" target="_blank"
+                            class="btn btn-icon-soscial btn-lg rounded-circle">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://api.whatsapp.com/send?phone=261346966556&text=Haingotiana%20Muriel" target="_blank" class="btn btn-icon-soscial btn-lg rounded-circle">
+                        <a href="https://api.whatsapp.com/send?phone=261346966556&text=Haingotiana%20Muriel"
+                            target="_blank" class="btn btn-icon-soscial btn-lg rounded-circle">
                             <i class="fab fa-whatsapp"></i>
                         </a>
 
