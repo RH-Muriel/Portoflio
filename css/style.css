@@ -1385,6 +1385,10 @@ body {
   .mega-menu-modern {
     border: none;
   }
+  .mega-content{
+    width: 100%;
+    overflow-x: scroll!important;
+  }
   .mega-column h6,
   a {
     font-size: 0.8rem;
