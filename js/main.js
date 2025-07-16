@@ -399,65 +399,66 @@
  });
  // Send mail
  function sendMail() {
-   emailjs.init("4iF--6Qa2-Mz5Dihp");
+  emailjs.init("4iF--6Qa2-Mz5Dihp");
 
-   var submitBtn = document.getElementById("submitBtn");
-   var spinner = document.getElementById("spinner");
-   var buttonText = document.querySelector(".button-content");
-   var statusMessage = document.getElementById("statusMessage");
+  var submitBtn = document.getElementById("submitBtn");
+  var spinner = document.getElementById("spinner");
+  var buttonText = document.querySelector(".button-content");
+  var statusMessage = document.getElementById("statusMessage");
 
-   var name = document.querySelector("#name").value.trim();
-   var email = document.querySelector("#email").value.trim();
-   var subject = document.querySelector("#subject").value.trim();
-   var message = document.querySelector("#message").value.trim();
+  var name = document.querySelector("#name").value.trim();
+  var email = document.querySelector("#email").value.trim();
+  var subject = document.querySelector("#subject").value.trim();
+  var message = document.querySelector("#message").value.trim();
 
-   if (!name || !email || !message) {
-     statusMessage.textContent = "Veuillez remplir tous les champs obligatoires.";
-     statusMessage.className = "error";
-     statusMessage.classList.remove("d-none");
-     return;
-   }
+  // Validation améliorée
+  if (!name || !email || !subject || !message) {
+    statusMessage.textContent = "Veuillez remplir tous les champs obligatoires.";
+    statusMessage.className = "error";
+    statusMessage.classList.remove("d-none");
+    return;
+  }
 
-   submitBtn.disabled = true;
-   spinner.classList.remove("d-none");
-   buttonText.style.display = "none";
+  submitBtn.disabled = true;
+  spinner.classList.remove("d-none");
+  buttonText.style.display = "none";
 
-   // Paramètres avec informations expéditeur
-   var params = {
-     sender_name: name, // Nom brut de l'expéditeur
-     sender_email: email, // Email brut de l'expéditeur
-     formatted_sender: `${name} <${email}>`, // Format "Nom <email>"
-     subject: subject,
-     message: message,
-     reply_to: email
-   };
+  // Paramètres mis à jour
+  var params = {
+    from_name: `${name} via Formulaire Contact`, 
+    sender_name: name,
+    sender_email: email,
+    subject: subject,
+    message: message,
+    reply_to: email 
+  };
 
-   var serviceID = "service_jjhd14n";
-   var templateID = "template_l3gcf0h";
+  var serviceID = "service_jjhd14n";
+  var templateID = "template_l3gcf0h";
 
-   emailjs
-     .send(serviceID, templateID, params)
-     .then(() => {
-       statusMessage.textContent = "Message envoyé avec succès !";
-       statusMessage.className = "success";
-       statusMessage.classList.remove("d-none");
-       document.getElementById("contactForm").reset();
-     })
-     .catch((err) => {
-       console.error(err);
-       statusMessage.textContent = "Erreur lors de l'envoi du message.";
-       statusMessage.className = "error";
-       statusMessage.classList.remove("d-none");
-     })
-     .finally(() => {
-       submitBtn.disabled = false;
-       spinner.classList.add("d-none");
-       buttonText.style.display = "inline";
-       setTimeout(() => {
-         statusMessage.classList.add("d-none");
-       }, 5000);
-     });
- }
+  emailjs
+    .send(serviceID, templateID, params)
+    .then(() => {
+      statusMessage.textContent = "Message envoyé avec succès !";
+      statusMessage.className = "success";
+      statusMessage.classList.remove("d-none");
+      document.getElementById("contactForm").reset();
+    })
+    .catch((err) => {
+      console.error(err);
+      statusMessage.textContent = "Erreur lors de l'envoi du message. Veuillez réessayer.";
+      statusMessage.className = "error";
+      statusMessage.classList.remove("d-none");
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      spinner.classList.add("d-none");
+      buttonText.style.display = "inline";
+      setTimeout(() => {
+        statusMessage.classList.add("d-none");
+      }, 5000);
+    });
+}
  // 
  // Fonctionnalité de la boîte de chat
  document.addEventListener('DOMContentLoaded', function () {
@@ -667,3 +668,10 @@
      }
    });
  });
+//  pricing
+document.querySelectorAll('.redirect-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      if (target) window.location.href = target;
+    });
+  });
