@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services et Tarifs - Rédaction Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #50e3c2;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #fafbfc;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .Title-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .Title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        /* Section Services */
+        .services-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 144, 226, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            box-shadow: 0 4px 24px rgba(13, 110, 253, 0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(13, 110, 253, 0.15);
+            border-color: rgba(74, 144, 226, 0.3);
+        }
+        
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .icon-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white !important;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Section Tarifs */
+        .pricing-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(80, 227, 194, 0.05) 100%);
+            z-index: 0;
+        }
+        
+        .pricing-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(80, 227, 194, 0.05) 0%, rgba(74, 144, 226, 0.05) 100%);
+            z-index: 0;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.15);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+            z-index: 2;
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.02) translateY(-10px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 3;
+        }
+        
+        .pricing-title {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .pricing-title h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        
+        .pricing-price {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .price-period {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .pricing-features {
+            padding: 30px 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-item i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-cta {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn-primary-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(74, 144, 226, 0.4);
+        }
+        
+        .pricing-card.popular .btn-primary-gradient {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .pricing-card.popular .btn-primary-gradient:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.3), transparent);
+            margin: 80px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            background: white;
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+            
+            .popular-badge {
+                top: 15px;
+                right: -35px;
+                padding: 6px 35px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section Services -->
+     <section class="services-section py-5 bg-light" id="services">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="Title-underline display-5 fw-bold mb-4">Mes <span class="highlight">Services</span>
+                    </h2>
+                    <p class="lead">Des solutions rédactionnelles sur mesure pour booster votre présence en ligne</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="service-card">
+                        <div class="card-body p-4">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-search-dollar fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Rédaction SEO</h3>
+                            <p class="text-secondary">Contenus optimisés pour les moteurs de recherche avec intégration
+                                de mots-clés stratégiques</p>
+                            <ul class="list-unstyled ps-0">
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Audit sémantique</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Stratégie de contenu</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Optimisation technique</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a href="#pricing" class="btn btn-outline-primary w-100 hover-scale">
+                                Voir les tarifs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="card-body p-4">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-file-alt fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Fiches Produit</h3>
+                            <p class="text-secondary">Descriptions percutantes qui convertissent les visiteurs en
+                                clients</p>
+                            <ul class="list-unstyled ps-0">
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Argumentaire commercial</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Structure optimisée</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Mise en valeur USP</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a href="#pricing" class="btn btn-outline-primary w-100 hover-scale">
+                                Voir les tarifs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="card-body p-4">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-globe-africa fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Traduction</h3>
+                            <p class="text-secondary">Traduction professionnelle FR/EN/MG avec adaptation culturelle</p>
+                            <ul class="list-unstyled ps-0">
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Localisation avancée</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>SEO multilingue</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                                    <span>Proofreading natif</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a href="#pricing" class="btn btn-outline-primary w-100 hover-scale">
+                                Voir les tarifs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+    
+    <!-- Section Tarifs -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2 class="display-5 fw-bold mb-3">Nos <span class="highlight">Tarifs</span></h2>
+                <p class="lead mb-4">Des offres transparentes adaptées à vos besoins</p>
+                <div class="d-flex justify-content-center">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary active">À la carte</button>
+                        <button type="button" class="btn btn-outline-primary">Forfaits</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Carte Tarif 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-title">
+                            <h3>Rédaction SEO</h3>
+                        </div>
+                        <div class="pricing-price">
+                            <div class="price-amount">50€</div>
+                            <div class="price-period">par page</div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Article de blog (800-1000 mots)</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Recherche de mots-clés</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Optimisation on-page</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Structure de contenu</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>1 révision incluse</span>
+                            </div>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="#contact" class="btn btn-primary-gradient">Choisir ce tarif</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carte Tarif 2 (Populaire) -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">POPULAIRE</div>
+                        <div class="pricing-title">
+                            <h3>Fiches Produit</h3>
+                        </div>
+                        <div class="pricing-price">
+                            <div class="price-amount">30€</div>
+                            <div class="price-period">par fiche</div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Description produit (300 mots)</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Argumentaire de vente</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Mise en avant des bénéfices</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Optimisation pour e-commerce</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Formatage inclus</span>
+                            </div>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="#contact" class="btn btn-primary-gradient">Choisir ce tarif</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carte Tarif 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-title">
+                            <h3>Traduction</h3>
+                        </div>
+                        <div class="pricing-price">
+                            <div class="price-amount">0.10€</div>
+                            <div class="price-period">par mot</div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Traduction FR/EN/MG</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Adaptation culturelle</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Relecture par un natif</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Délai rapide</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Garantie de qualité</span>
+                            </div>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="#contact" class="btn btn-primary-gradient">Choisir ce tarif</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section FAQ -->
+            <div class="section-divider"></div>
+            
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Questions <span class="highlight">Fréquentes</span></h2>
+                    <p class="lead">Trouvez les réponses à vos interrogations</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="faq-item active">
+                        <div class="faq-question">
+                            <span>Quels sont vos délais de livraison ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nos délais varient selon le type de service et la quantité de travail. En général :</p>
+                            <ul>
+                                <li>Articles de blog : 2-3 jours ouvrés</li>
+                                <li>Fiches produit : 1-2 jours ouvrés</li>
+                                <li>Traductions : 24-48 heures pour les petits projets</li>
+                            </ul>
+                            <p>Pour les projets urgents, nous proposons un service express avec supplément.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Proposez-vous des forfaits pour les gros volumes ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolument ! Nous offrons des tarifs préférentiels pour les commandes régulières ou les gros volumes :</p>
+                            <ul>
+                                <li>Pack de 10 articles : -15%</li>
+                                <li>Pack de 20 fiches produits : -20%</li>
+                                <li>Traduction de plus de 10 000 mots : -10%</li>
+                            </ul>
+                            <p>Contactez-nous pour une offre personnalisée adaptée à vos besoins.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quelles sont vos méthodes de paiement ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nous acceptons plusieurs méthodes de paiement pour votre convenance :</p>
+                            <ul>
+                                <li>Virement bancaire</li>
+                                <li>PayPal</li>
+                                <li>Carte bancaire (via Stripe)</li>
+                                <li>Transferwise (pour les paiements internationaux)</li>
+                            </ul>
+                            <p>Les paiements sont généralement exigés à la commande ou à la livraison selon le type de projet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Proposez-vous des révisions ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Oui, chaque prestation inclut une révision gratuite dans les 7 jours suivant la livraison. Cette révision couvre :</p>
+                            <ul>
+                                <li>Corrections mineures</li>
+                                <li>Ajustements de ton</li>
+                                <li>Modifications mineures demandées</li>
+                            </ul>
+                            <p>Les demandes de révision substantielles ou de changement de direction peuvent entraîner des frais supplémentaires.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section Contact -->
+            <div class="section-divider"></div>
+            
+            <div class="row justify-content-center mt-5" id="contact">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Contactez-<span class="highlight">nous</span></h2>
+                    <p class="lead">Prêt à démarrer votre projet ? Parlons-en !</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="mb-4">Demander un devis personnalisé</h3>
+                        <p class="mb-4">Remplissez ce formulaire et nous vous répondrons dans les 24 heures avec une offre adaptée à votre projet.</p>
+                        
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" placeholder="Votre nom">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control form-control-lg" placeholder="Votre email">
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select form-select-lg">
+                                    <option selected>Type de service</option>
+                                    <option>Rédaction SEO</option>
+                                    <option>Fiches Produit</option>
+                                    <option>Traduction</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control form-control-lg" rows="4" placeholder="Détails de votre projet"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary-gradient">
+                                    Envoyer la demande <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p class="mb-0">© 2023 Rédaction Web Pro. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script pour les FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // Script pour la navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
