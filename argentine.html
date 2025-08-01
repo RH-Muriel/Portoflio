@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Destinations en Argentine | Voyage Argentin</title>
+    <link href="img/logo/logo-icon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Favicons -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/article2.css">
+</head>
+
+<body>
+    <header>
+        <nav class="custum-navbar navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-pen-nib me-2"></i><span class="logo-text">Muriel</span>
+                </a>
+
+                <!-- Groupe mobile -->
+                <div class="d-flex align-items-center order-lg-2">
+                    <!-- Bouton Contact mobile -->
+                    <button class="btn btn-contact d-lg-none mobile-contact">
+                        <span class="text-uppercase">Contactez-moi</span>
+                    </button>
+
+                    <!-- Toggler personnalisé -->
+                    <button class="custom-toggler navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="toggler-icon"></span>
+                    </button>
+                </div>
+
+                <!-- Menu principal -->
+                <div class="collapse navbar-collapse order-lg-1" id="navbarNavDropdown">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="argentine.html">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#about">à propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#services">Services</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Articles
+                            </a>
+                            <div class="dropdown-menu mega-menu-modern">
+                                <div class="mega-content">
+                                    <div class="mega-column">
+                                        <h6>Voyages</h6>
+                                        <a href="/pologne.html">Pologne</a>
+                                        <a href="/argentine.html">Argentine</a>
+                                        <a href="#">Canada</a>
+                                    </div>
+                                    <div class="mega-column">
+                                        <h6>Produits</h6>
+                                        <a href="techno.html">Technologie</a>
+                                        <a href="#">Électronique</a>
+                                        <a href="#">Mode</a>
+                                    </div>
+                                    <div class="mega-column">
+                                        <h6>Décoration</h6>
+                                        <a href="#">Intérieur/Extérieur</a>
+                                        <a href="#">Architecture</a>
+                                        <a href="#" class="autres-link">Autres</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#blog">Blog</a>
+                        </li>
+                    </ul>
+                    <!-- Bouton Contact desktop -->
+                    <a href="#contact" class="btn btn-contact d-none d-lg-inline-block">
+                        <span>Contactez-moi</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="tagline"><i class="fas fa-compass"></i> Découvrez la beauté de l'Argentine</p>
+                    <h1 class="hero-title">NOS 5 DESTINATIONS À VOIR LORS D'UN SÉJOUR EN ARGENTINE</h1>
+                    <p class="intro-text">Vous envisagez prochainement de faire un voyage en Argentine ? Entre
+                        montagnes, lacs, chutes d'eau, vallées arides, la diversité des paysages dont il dispose vous
+                        laissera d'incroyables souvenirs. Nous avons sélectionné les 5 meilleurs lieux à visiter pendant
+                        vos vacances en Argentine.</p>
+                    <a href="#destinations" class="btn-custom">Explorer les destinations <i
+                            class="fas fa-arrow-down"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mt-5" id="destinations">
+        <div class="row g-4 g-md-5">
+            <!-- Buenos Aires -->
+            <div class="col-12">
+                <div class="destination-card">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="destination-img-container">
+                                <span class="destination-number">1</span>
+                                <img src="img/photos/Image2.jpg" alt="Buenos Aires, Argentine" class="destination-img">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="destination-content">
+                                <h2 class="destination-title">Buenos Aires, la métropole vivante aux mille couleurs</h2>
+                                <p class="credit"><i class="fas fa-camera"></i> Crédit photo : Wesley Souza</p>
+                                <p>Capitale de l'Argentine, Buenos Aires est qualifiée d'être la ville la plus
+                                    européenne de l'Amérique Latine. En effet, l'architecture de certains quartiers
+                                    rappelle celle des grandes métropoles comme Naples, Madrid ou Paris. N'hésitez pas à
+                                    faire une halte dans les puertas cerradas, des bars et restaurants locaux.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>À ne pas manquer :</strong>
+                        Voir les spectacles de tango dans les rues et les cafés de San Telmo
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chutes d'Iguazú -->
+            <div class="col-12">
+                <div class="destination-card">
+                    <div class="row g-0">
+                        <div class="col-md-6 order-md-2">
+                            <div class="destination-img-container">
+                                <span class="destination-number">2</span>
+                                <img src="img/photos/Image3.jpg" alt="Chutes d'Iguazú, Argentine"
+                                    class="destination-img">
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-1">
+                            <div class="destination-content">
+                                <h2 class="destination-title">Les Chutes d'Iguazú, des cascades à couper le souffle</h2>
+                                <p class="credit"><i class="fas fa-camera"></i> Crédit photo : Ana Benet</p>
+                                <p>Les 275 cascades et chutes d'eau du parc national d'Iguazú offrent un spectacle
+                                    unique et hors du commun. Se trouvant entre l'Argentine et le Brésil, elles font
+                                    partie des lieux incontournables à voir pour ceux qui aiment la nature.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>À ne pas manquer :</strong>
+                        Parcourez les sentiers forestiers environnants pour découvrir les perroquets, les
+                        toucans, les tamanoirs, les singes hurleurs ainsi que plus de 2000 espèces de
+                        végétaux typiques de la région.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perito Moreno -->
+            <div class="col-12">
+                <div class="destination-card">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="destination-img-container">
+                                <span class="destination-number">3</span>
+                                <img src="img/photos/Image4.jpg" alt="Glacier Perito Moreno, Argentine"
+                                    class="destination-img">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="destination-content">
+                                <h2 class="destination-title">Perito Moreno, le glacier le plus vivant de Patagonie</h2>
+                                <p class="credit"><i class="fas fa-camera"></i> Crédit photo : Kristina Gain</p>
+                                <p>Se trouvant en Patagonie, à 75 km de la ville d'El Calafate, le majestueux glacier
+                                    Perito Moreno, vous en met plein les yeux. Mesurant 3 km de long, 5 km de large et
+                                    une hauteur de 180 mètres, il est classé à la 3ème place des plus grandes calottes
+                                    glacières de la planète.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>À ne pas manquer :</strong>
+                        Afin d'admirer d'un autre angle cette immense barrière de glace blanche teintée de
+                        bleu, faire une croisière en bateau d'une heure est une bonne idée.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Garganta Del Diablo -->
+            <div class="col-12">
+                <div class="destination-card">
+                    <div class="row g-0">
+                        <div class="col-md-6 order-md-2">
+                            <div class="destination-img-container">
+                                <span class="destination-number">4</span>
+                                <img src="img/photos/iguazu-2773777_1280.jpg" alt="Garganta Del Diablo, Argentine"
+                                    class="destination-img">
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-1">
+                            <div class="destination-content">
+                                <h2 class="destination-title">Garganta Del Diablo, une cascade naturelle impressionnante
+                                </h2>
+                                <p class="credit"><i class="fas fa-camera"></i> Crédit photo : Jonny Lew</p>
+                                <p>La cascade de la Gorge du Diable ou Garganta Del Diablo se situe au sein du parc
+                                    national d'Iguazú. Ayant la forme de la lettre U, les eaux de la rivière se
+                                    déversent à une hauteur de 82 mètres. En empruntant la passerelle qui se trouve
+                                    au-dessus de l'eau, vous admirerez un vue impressionnante de la cascade.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>À ne pas manquer :</strong>
+                        Faire une randonnée de 6 kilomètres aux environs de la cascade pour découvrir la
+                        faune et la flore.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ushuaïa -->
+            <div class="col-12">
+                <div class="destination-card">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="destination-img-container">
+                                <span class="destination-number">5</span>
+                                <img src="img/photos/Image5.jpg" alt="Ushuaïa, Argentine" class="destination-img">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="destination-content">
+                                <h2 class="destination-title">Ushuaïa, la dernière ville au bout du monde</h2>
+                                <p class="credit"><i class="fas fa-camera"></i> Crédit photo : Francisco Paez</p>
+                                <p>Même si Ushuaïa est une ville isolée située à l'extrême sud de l'Argentine, elle ne
+                                    cesse d'attirer les visiteurs provenant des quatre coins du monde. En effet, elle
+                                    est le dernier lieu où l'on peut encore trouver la civilisation avant d'accéder à
+                                    l'Antarctique.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="highlight">
+                        <strong>À ne pas manquer :</strong>
+                        Profitez d'une excursion en bateau sur le canal de Beagle pour découvrir les oiseaux,
+                        les orques, les pingouins et autres mammifères marins spécifiques de la zone.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <div id="argentina-map"></div>
+            <div class="map-overlay">
+                <h3><i class="fas fa-map-marked-alt"></i> Destinations en Argentine</h3>
+                <ul class="map-destinations">
+                    <li data-lat="-34.6037" data-lng="-58.3816"><i class="fas fa-map-pin"></i> Buenos Aires</li>
+                    <li data-lat="-25.6953" data-lng="-54.4367"><i class="fas fa-map-pin"></i> Chutes d'Iguazú</li>
+                    <li data-lat="-50.3306" data-lng="-73.2386"><i class="fas fa-map-pin"></i> Glacier Perito Moreno
+                    </li>
+                    <li data-lat="-25.6953" data-lng="-54.4367"><i class="fas fa-map-pin"></i> Garganta Del Diablo</li>
+                    <li data-lat="-54.8019" data-lng="-68.3030"><i class="fas fa-map-pin"></i> Ushuaïa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recommendation Section -->
+        <div class="recommendation">
+            <h3>Prêt à découvrir d'autres destinations ?</h3>
+            <p>Découvrez également nos 8 destinations où partir en Espagne en 2023</p>
+            <a href="#" class="btn-custom">Voir les destinations en Espagne <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section bg-gradient py-4 mt-auto">
+        <div class="container text-center">
+            <small class="text-light">&copy; 2023 Destinations Voyage. Tous droits réservés.</small>
+        </div>
+    </footer>
+    <button id="toTopBtn" title="Go to top">
+        <i class="bi bi-chevron-bar-up  toTopBtnUp"></i>
+    </button>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('argentina-map').setView([-38.4161, -63.6167], 4);
+
+        // Add tile layer (Mapbox Streets)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Custom icon
+        const customIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            shadowSize: [41, 41]
+        });
+
+        // Destinations data
+        const destinations = [
+            {
+                name: "Buenos Aires",
+                lat: -34.6037,
+                lng: -58.3816,
+                description: "Capitale vibrante de l'Argentine, connue pour son architecture européenne et sa scène culturelle animée."
+            },
+            {
+                name: "Chutes d'Iguazú",
+                lat: -25.6953,
+                lng: -54.4367,
+                description: "Les impressionnantes chutes d'eau à la frontière entre l'Argentine et le Brésil."
+            },
+            {
+                name: "Glacier Perito Moreno",
+                lat: -50.3306,
+                lng: -73.2386,
+                description: "L'un des glaciers les plus spectaculaires de la Patagonie argentine."
+            },
+            {
+                name: "Garganta Del Diablo",
+                lat: -25.6953,
+                lng: -54.4367,
+                description: "La cascade la plus impressionnante du parc national d'Iguazú."
+            },
+            {
+                name: "Ushuaïa",
+                lat: -54.8019,
+                lng: -68.3030,
+                description: "La ville la plus australe du monde, point de départ pour l'Antarctique."
+            }
+        ];
+
+        // Add markers to the map
+        destinations.forEach(destination => {
+            const marker = L.marker([destination.lat, destination.lng], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`<b>${destination.name}</b><br>${destination.description}`);
+        });
+
+        // Add click events to destination list
+        document.querySelectorAll('.map-destinations li').forEach(item => {
+            item.addEventListener('click', function () {
+                const lat = parseFloat(this.getAttribute('data-lat'));
+                const lng = parseFloat(this.getAttribute('data-lng'));
+                map.setView([lat, lng], 10);
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple fade-in animation for elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.destination-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>

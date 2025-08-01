@@ -399,66 +399,66 @@
  });
  // Send mail
  function sendMail() {
-  emailjs.init("4iF--6Qa2-Mz5Dihp");
+   emailjs.init("4iF--6Qa2-Mz5Dihp");
 
-  var submitBtn = document.getElementById("submitBtn");
-  var spinner = document.getElementById("spinner");
-  var buttonText = document.querySelector(".button-content");
-  var statusMessage = document.getElementById("statusMessage");
+   var submitBtn = document.getElementById("submitBtn");
+   var spinner = document.getElementById("spinner");
+   var buttonText = document.querySelector(".button-content");
+   var statusMessage = document.getElementById("statusMessage");
 
-  var name = document.querySelector("#name").value.trim();
-  var email = document.querySelector("#email").value.trim();
-  var subject = document.querySelector("#subject").value.trim();
-  var message = document.querySelector("#message").value.trim();
+   var name = document.querySelector("#name").value.trim();
+   var email = document.querySelector("#email").value.trim();
+   var subject = document.querySelector("#subject").value.trim();
+   var message = document.querySelector("#message").value.trim();
 
-  // Validation améliorée
-  if (!name || !email || !subject || !message) {
-    statusMessage.textContent = "Veuillez remplir tous les champs obligatoires.";
-    statusMessage.className = "error";
-    statusMessage.classList.remove("d-none");
-    return;
-  }
+   // Validation améliorée
+   if (!name || !email || !subject || !message) {
+     statusMessage.textContent = "Veuillez remplir tous les champs obligatoires.";
+     statusMessage.className = "error";
+     statusMessage.classList.remove("d-none");
+     return;
+   }
 
-  submitBtn.disabled = true;
-  spinner.classList.remove("d-none");
-  buttonText.style.display = "none";
+   submitBtn.disabled = true;
+   spinner.classList.remove("d-none");
+   buttonText.style.display = "none";
 
-  // Paramètres mis à jour
-  var params = {
-    from_name: `${name} via Formulaire Contact`, 
-    sender_name: name,
-    sender_email: email,
-    subject: subject,
-    message: message,
-    reply_to: email 
-  };
+   // Paramètres mis à jour
+   var params = {
+     from_name: `${name} via Formulaire Contact`,
+     sender_name: name,
+     sender_email: email,
+     subject: subject,
+     message: message,
+     reply_to: email
+   };
 
-  var serviceID = "service_jjhd14n";
-  var templateID = "template_l3gcf0h";
+   var serviceID = "service_jjhd14n";
+   var templateID = "template_l3gcf0h";
 
-  emailjs
-    .send(serviceID, templateID, params)
-    .then(() => {
-      statusMessage.textContent = "Message envoyé avec succès !";
-      statusMessage.className = "success";
-      statusMessage.classList.remove("d-none");
-      document.getElementById("contactForm").reset();
-    })
-    .catch((err) => {
-      console.error(err);
-      statusMessage.textContent = "Erreur lors de l'envoi du message. Veuillez réessayer.";
-      statusMessage.className = "error";
-      statusMessage.classList.remove("d-none");
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      spinner.classList.add("d-none");
-      buttonText.style.display = "inline";
-      setTimeout(() => {
-        statusMessage.classList.add("d-none");
-      }, 5000);
-    });
-}
+   emailjs
+     .send(serviceID, templateID, params)
+     .then(() => {
+       statusMessage.textContent = "Message envoyé avec succès !";
+       statusMessage.className = "success";
+       statusMessage.classList.remove("d-none");
+       document.getElementById("contactForm").reset();
+     })
+     .catch((err) => {
+       console.error(err);
+       statusMessage.textContent = "Erreur lors de l'envoi du message. Veuillez réessayer.";
+       statusMessage.className = "error";
+       statusMessage.classList.remove("d-none");
+     })
+     .finally(() => {
+       submitBtn.disabled = false;
+       spinner.classList.add("d-none");
+       buttonText.style.display = "inline";
+       setTimeout(() => {
+         statusMessage.classList.add("d-none");
+       }, 5000);
+     });
+ }
  // 
  // Fonctionnalité de la boîte de chat
  document.addEventListener('DOMContentLoaded', function () {
@@ -668,10 +668,106 @@
      }
    });
  });
-//  pricing
-document.querySelectorAll('.redirect-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-target');
-      if (target) window.location.href = target;
-    });
-  });
+ //  pricing
+ document.querySelectorAll('.redirect-btn').forEach(btn => {
+   btn.addEventListener('click', () => {
+     const target = btn.getAttribute('data-target');
+     if (target) window.location.href = target;
+   });
+ });
+
+ // ======Map========
+ // Initialize the map
+ const map = L.map('argentina-map').setView([-38.4161, -63.6167], 4);
+
+ // Add tile layer (Mapbox Streets)
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+ }).addTo(map);
+
+ // Custom icon
+ const customIcon = L.icon({
+   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+   iconSize: [25, 41],
+   iconAnchor: [12, 41],
+   popupAnchor: [1, -34],
+   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+   shadowSize: [41, 41]
+ });
+
+ // Destinations data
+ const destinations = [{
+     name: "Buenos Aires",
+     lat: -34.6037,
+     lng: -58.3816,
+     description: "Capitale vibrante de l'Argentine, connue pour son architecture européenne et sa scène culturelle animée."
+   },
+   {
+     name: "Chutes d'Iguazú",
+     lat: -25.6953,
+     lng: -54.4367,
+     description: "Les impressionnantes chutes d'eau à la frontière entre l'Argentine et le Brésil."
+   },
+   {
+     name: "Glacier Perito Moreno",
+     lat: -50.3306,
+     lng: -73.2386,
+     description: "L'un des glaciers les plus spectaculaires de la Patagonie argentine."
+   },
+   {
+     name: "Garganta Del Diablo",
+     lat: -25.6953,
+     lng: -54.4367,
+     description: "La cascade la plus impressionnante du parc national d'Iguazú."
+   },
+   {
+     name: "Ushuaïa",
+     lat: -54.8019,
+     lng: -68.3030,
+     description: "La ville la plus australe du monde, point de départ pour l'Antarctique."
+   }
+ ];
+
+ // Add markers to the map
+ destinations.forEach(destination => {
+   const marker = L.marker([destination.lat, destination.lng], {
+       icon: customIcon
+     })
+     .addTo(map)
+     .bindPopup(`<b>${destination.name}</b><br>${destination.description}`);
+ });
+
+ // Add click events to destination list
+ document.querySelectorAll('.map-destinations li').forEach(item => {
+   item.addEventListener('click', function () {
+     const lat = parseFloat(this.getAttribute('data-lat'));
+     const lng = parseFloat(this.getAttribute('data-lng'));
+     map.setView([lat, lng], 10);
+   });
+ });
+
+ // Smooth scrolling
+ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+   anchor.addEventListener('click', function (e) {
+     e.preventDefault();
+     document.querySelector(this.getAttribute('href')).scrollIntoView({
+       behavior: 'smooth'
+     });
+   });
+ });
+
+ // Simple fade-in animation for elements on scroll
+ const observer = new IntersectionObserver((entries) => {
+   entries.forEach(entry => {
+     if (entry.isIntersecting) {
+       entry.target.classList.add('animated');
+     }
+   });
+ }, {
+   threshold: 0.1
+ });
+
+ document.querySelectorAll('.destination-card').forEach(card => {
+   observer.observe(card);
+ });
+

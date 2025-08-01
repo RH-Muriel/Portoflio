@@ -170,7 +170,7 @@ body {
 }
 
 .custum-navbar .dropdown .dropdown-toggle[aria-expanded="true"]::after {
-  transform: rotate(-180deg);
+  transform: rotate(-180deg)!important;
   transition: transform 0.7s;
 }
 
@@ -1904,3 +1904,4 @@ body {
   }
 }
 /*  */
+
