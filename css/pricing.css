@@ -4,7 +4,7 @@
   --dark: #2c3e50;
   --light: #f8f9fa;
   --gray: #6c757d;
-   --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 body {
@@ -239,7 +239,7 @@ h5 {
 .btn-primary-gradient {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   border: none;
-  color: white!important;
+  color: white !important;
   padding: 12px 30px;
   /* border-radius: 30px; */
   font-weight: 500;
@@ -251,7 +251,7 @@ h5 {
 
 .btn-primary-gradient:hover {
   color: white;
-  cursor: pointer!important;
+  cursor: pointer !important;
   transform: translateY(-3px);
   box-shadow: 0 7px 15px rgba(74, 144, 226, 0.4);
 }
@@ -309,7 +309,7 @@ h5 {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: 1.1rem;
 }
 
@@ -346,6 +346,113 @@ h5 {
 .faq-answer li {
   margin-bottom: 8px;
   color: #475569;
+}
+/*  */
+/* Nouvelle section Contact */
+
+
+.contact-section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-section-title h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--dark);
+}
+
+.contact-section-title p {
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark);
+  transition: transform 0.3s ease, color 0.3s ease;
+  width: 120px;
+  position: relative;
+}
+
+.contact-icon:hover {
+  transform: translateY(-8px);
+}
+
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.contact-icon:hover .icon-wrapper::before {
+  opacity: 2;
+}
+
+.contact-icon:hover .icon-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.whatsapp .icon-wrapper {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%)!important;
+  color: white;
+}
+
+.linkedin .icon-wrapper {
+  background: linear-gradient(135deg, #0077b5 0%, #004471 100%)!important;
+  color: white;
+}
+
+.email .icon-wrapper {
+  background: linear-gradient(135deg, var(--primary) 0%, #1a5ca3 100%)!important;
+  color: white;
+}
+
+.contact-label {
+  font-weight: 500;
+  color: var(--dark);
+  text-align: center;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.contact-icon:hover .contact-label {
+  color: var(--primary);
 }
 
 .back-to-services {
