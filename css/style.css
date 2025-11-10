@@ -170,7 +170,7 @@ body {
 }
 
 .custum-navbar .dropdown .dropdown-toggle[aria-expanded="true"]::after {
-  transform: rotate(-180deg)!important;
+  transform: rotate(-180deg) !important;
   transition: transform 0.7s;
 }
 
@@ -497,16 +497,72 @@ body {
   position: relative;
   margin: 0 auto;
   max-width: 400px;
+  animation: glow-pulse 3s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .img-profile img {
-  width: 100%;
-  border-radius: 20px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  width: 85%;
+  border-radius: 50%;
   border: 5px solid var(--primary);
   transform: rotate(-3deg);
-  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    20px 20px 60px rgba(0, 0, 0, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
 }
 
+.img-profile:hover img {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 
+    0 0 30px var(--primary),
+    20px 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Effet de lueur amélioré */
+.img-profile::before {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    var(--primary) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  opacity: 0.1;
+  z-index: 1;
+  animation: glow-move 4s ease-in-out infinite alternate;
+}
+
+/* Animation de pulsation améliorée */
+@keyframes glow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+/* Animation de déplacement de la lueur */
+@keyframes glow-move {
+  0% {
+    transform: translateX(-10%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(10%) rotate(180deg);
+  }
+}
 .hero-title {
   line-height: 1;
   /* margin-bottom: 2rem !important; */
@@ -1502,8 +1558,8 @@ body {
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   overflow-y: auto;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .profile-panel::-webkit-scrollbar {
@@ -1904,4 +1960,3 @@ body {
   }
 }
 /*  */
-
